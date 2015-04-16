@@ -1,22 +1,27 @@
-#Csv export middleware
+#Csv formatter
 
-This thing generates an express middleware which sits at the end of a middleware chain and:
+This things takes:
 
-* examines the request to see if csv was requestes
-* transforms the response to csv, using the provided schema to generate columns
+* data (as an array of objects)
+* a schema definition (currently supported : mongoose only)
+* an exclude list (if you wish not to export all columns)
 
-example:
+It then generates column definitions, based on the provided schema. Each column type has a default formatter.
+It will be possible to provide user defined formatter to handle schemaless fields.
 
-    var csvExportable = require(''),
+Default formatters implementation:
 
-    app.get('/api/user',
-            userMW.isLoggedIn,
-            userMW.checkAccess('view', 'Project.user_list'),
-            user.index,
-            csvExportable(mongoose.model('User'))
-   );
+* String -> returned as it is
+* Number -> returned as string
+* Date -> returned as ISO 8601 Date
 
-## Supported schema models:
+It will then generate data, providing an array of arrays ready for csv serialization
 
-    * Mongoose
-    * Loopback (Coming soon)
+
+### Usage examples in spec/
+
+## What's next
+
+* Support loopback-style models
+* Streams support
+* .. add your own

@@ -17,6 +17,12 @@ var schemaTypes = {
 
 };
 
+function exportRow(row, colDefs){
+
+
+}
+
+
 module.exports = function(model, schemaType, exclude){
 
     var exporter = schemaTypes[schemaType];
@@ -26,10 +32,25 @@ module.exports = function(model, schemaType, exclude){
         throw new Error('Unrecognized schema type '+schemaType);
     }
 
-    var cols = exporter.columns(model);
+    var cols = exporter.columns(model, exclude);
 
     return function(data){
 
-        var firstRow = lodash.pluck(cols, 'name');
+        var colnames =  lodash.pluck(cols, 'name');
+
+        return data.reduce(function(rows, obj){
+
+            var row = colnames.map(function(colname, i){
+
+                console.log(colname, obj);
+
+                return cols[i].formatter(obj[colname]);
+            });
+
+            rows.push(row);
+
+            return rows;
+
+        }, [colnames]);
     };
 };
