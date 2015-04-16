@@ -1,0 +1,140 @@
+'use strict';
+
+var ObjectId = function(){},
+    idGetter = function(){};
+
+module.exports =  { _id: { auto: true, type: ObjectId },
+  id:
+   { path: 'id',
+     getters: [ idGetter ],
+     setters: [],
+     options: {} },
+  firstName: { type: String },
+  lastName: { type:  String },
+  email:
+   { validate:
+      [ function(){},
+        'Your email domain is not allowed in this platform' ],
+     required: true,
+     type: String
+  },
+  status:
+   { enum: { message: 'Invalid status `{VALUE}`', values: [Object] },
+     required: true,
+     type: String },
+  resetPasswordToken: String,
+  avatar: String,
+  activationToken: String,
+  roleNames: Array,
+  externalIds:
+   { facebook: String,
+     twitter: String,
+     google: String,
+     linkedin: String },
+  totalLikes: { default: 0, type: Number },
+  projectRoles:
+   [ { paths: [Object],
+       subpaths: {},
+       virtuals: [Object],
+       nested: {},
+       inherits: {},
+       callQueue: [],
+       _indexes: [],
+       methods: {},
+       statics: {},
+       tree: [Object],
+       _requiredpaths: [Object],
+       discriminatorMapping: undefined,
+       _indexedpaths: undefined,
+       options: [Object],
+       _events: {} } ],
+  stats: [Function: Mixed],
+  platform: { type: [Function: ObjectId] },
+  deletedAt: { default: null, type: [Function: Date] },
+  hash: String,
+  salt: String,
+  roles: [ { ref: 'Role', type: [Function: ObjectId] } ],
+  updatedAt: Date,
+  createdAt: Date,
+  manager: String,
+  walletId: String,
+  walletBalance: [Function: Number],
+  successfulDesigner: { required: true, default: false, type: [Function: Boolean] },
+  successfulSupporter: { required: true, default: false, type: [Function: Boolean] },
+  tokens: { default: 0, type: [Function: Number] },
+  department: { type: String },
+  enterprise: String,
+  telefono: String,
+  cellulare: String,
+  address:
+   { default: null,
+     validate: [ [Object] ],
+     type: String },
+  city:
+   { default: null,
+     validate: [ [Object] ],
+     type: String },
+  acceptedRules:
+   { default: null,
+     validate: [ [Object] ],
+     type: [Function: Boolean] },
+  earnedCoins:
+   { default:
+      { total: 0,
+        supporterRank: 0,
+        adminRank: 0,
+        voucherEarnedCoins: 0,
+        supporterEarnedCoins: 0,
+        adminEarnedCoins: 0 },
+     type: {} },
+  investorType:
+   { enum: [ 'juridical', 'professional', 'physical' ],
+     type: { [Function: String] required: false } },
+  streetNumber:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  postalCode:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  tel:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  taxcode:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  businessName:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  VAT:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  businessType:
+   { default: null,
+     required: false,
+     enum: [ 'SS', 'SAS', 'SNC', 'SRL', 'SPA', 'SAPA', 'COOP', 'ALTRO', null ],
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  legalRepresentative:
+   { default: null,
+     validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  professionalSubtype:
+   { validate: [ [Object] ],
+     type: { [Function: String] required: false } },
+  lastQuestionnairePass: [Function: Date],
+  imageurl:
+   { path: 'imageurl',
+     getters: [ [Function] ],
+     setters: [],
+     options: {} },
+  totalSubscriptions:
+   { path: 'totalSubscriptions',
+     getters: [ [Function] ],
+     setters: [],
+     options: {} } }

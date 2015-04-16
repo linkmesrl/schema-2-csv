@@ -1,0 +1,30 @@
+{
+  "name": "schema-2-csv",
+  "version": "1.0.0",
+  "description": "Takes a schema, some data, and gives back an array of arrays for csv exporting with column titles",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linkmesrl/schema-2-csv.git"
+  },
+  "keywords": [
+    "csv",
+    "export",
+    "nodejs"
+  ],
+  "author": "Giovanni Lela",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linkmesrl/schema-2-csv/issues"
+  },
+  "homepage": "https://github.com/linkmesrl/schema-2-csv",
+  "devDependencies": {
+    "chai": "^2.2.0"
+  },
+  "dependencies": {
+    "lodash": "^3.6.0"
+  }
+}
