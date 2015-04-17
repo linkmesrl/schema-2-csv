@@ -14,7 +14,6 @@ var fakeSchema = {
 };
 
 
-
 var fakeData = [
     { number : 11, date : new Date('2001-12-21'), hash : 'Hash'}
 ];
@@ -22,7 +21,6 @@ var fakeData = [
 var mongooseSchema = { schema : { tree : fakeSchema}};
 
 describe('The mongoose schema plugin', function(){
-
 
     var mongooseExporter = require('../lib/mongoose_schema');
     var exclude = [ 'hash', 'salt' ];
@@ -46,6 +44,7 @@ describe('The mongoose schema plugin', function(){
         expect(res[0].name).to.equal('number');
         expect(res[1].name).to.equal('date');
     });
+
 
     it('does not complain if the type is defined in an object or not', function(){
 
@@ -173,7 +172,6 @@ describe('The row generator', function(){
             'prop' : {
 
                 'subprop' :  String,
-
                 'what' : { 'hey' : Number }
             }
         };
@@ -183,7 +181,6 @@ describe('The row generator', function(){
             {'prop' : {
 
                 'subprop' : 'gorgonzola',
-
                 'what' : { 'hey' : 666 }
                 }
             }
