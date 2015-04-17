@@ -17,11 +17,20 @@ var schemaTypes = {
 
 };
 
-function exportRow(row, colDefs){
+function nullFormatter(){
 
-
+    return '';
 }
 
+function getPath(obj, path){
+
+    for (var i=0; i<path.length; i++){
+
+        obj = obj[path[i]];
+    }
+
+    return obj;
+}
 
 module.exports = function(model, schemaType, exclude){
 
@@ -36,21 +45,30 @@ module.exports = function(model, schemaType, exclude){
 
     return function(data){
 
-        var colnames =  lodash.pluck(cols, 'name');
-
+        //for each row
         return data.reduce(function(rows, obj){
 
-            var row = colnames.map(function(colname, i){
+            //for each columns
+            var row = cols.map(function(col, i){
 
-                console.log(colname, obj);
+                //se è ricorsivo scendi
 
-                return cols[i].formatter(obj[colname]);
+                var toFormat= !!col.path ? getPath(obj, col.path) : obj[col.name];
+                //var toFormat = obj[col.name];
+
+                if(toFormat === null || toFormat === undefined){
+
+                    //the value is passed, maybe in the future null and undefined will be treated differently
+                    return nullFormatter(toFormat);
+                }
+
+                return cols[i].formatter(toFormat);
             });
 
             rows.push(row);
 
             return rows;
 
-        }, [colnames]);
+        }, [lodash.pluck(cols,'name')]);
     };
 };

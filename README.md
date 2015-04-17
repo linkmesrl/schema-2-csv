@@ -20,6 +20,7 @@ It will then generate data, providing an array of arrays ready for csv serializa
 
 ### Usage examples in spec/
 
+
 ## What's next
 
 * Support loopback-style models
