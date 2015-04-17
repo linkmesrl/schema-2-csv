@@ -29,6 +29,7 @@ function getPath(obj, path){
     for (var i=0; i<path.length; i++){
 
         obj = obj[path[i]];
+        if(!obj){ return ''; }
     }
 
     return obj;
