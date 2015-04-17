@@ -14,11 +14,26 @@ Default formatters implementation:
 * String -> returned as it is
 * Number -> returned as string
 * Date -> returned as ISO 8601 Date
+* Object -> it will flatten the object properties into columns
+
+example
+
+    prop : {
+        a : 'b',
+        c : { d : ''}
+    }
+
+will generate two columns 'prop.a' and 'prop.c.d' with values 'b' and '', respectively
+
 
 It will then generate data, providing an array of arrays ready for csv serialization
 
+##Usage example
 
-### Usage examples in spec/
+
+
+
+### More documentation and examples in spec/
 
 
 ## What's next
