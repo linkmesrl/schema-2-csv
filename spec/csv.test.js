@@ -76,8 +76,6 @@ describe('The row generator', function(){
 
         var cols = userCsvResponse(fakeData)[0];
 
-        console.log(userCsvResponse(fakeData));
-
         expect(cols).to.deep.equal(['number', 'date', 'hash']);
     });
 

@@ -35,7 +35,7 @@ function getPath(obj, path){
     return obj;
 }
 
-module.exports = function(model, schemaType, exclude){
+module.exports = function(model, schemaType, exclude, extend){
 
     var exporter = schemaTypes[schemaType];
 
@@ -44,7 +44,7 @@ module.exports = function(model, schemaType, exclude){
         throw new Error('Unrecognized schema type '+schemaType);
     }
 
-    var cols = exporter.columns(model, exclude);
+    var cols = exporter.columns(model, exclude, extend);
 
     return function(data){
 

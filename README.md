@@ -1,22 +1,31 @@
 #Csv formatter
 
-This things takes:
+This things needs to be configured with:
 
-* data (as an array of objects)
+* model (as model definition)
 * a schema definition (currently supported : mongoose only)
-* an exclude list (if you wish not to export all columns)
+* an exclude list (if you wish not to export all columns, array of fieldName)
+* an object with custom field to extend data
+
+`var formatter = csvResponse(model, 'mongoose', [], {})`
 
 It then generates column definitions, based on the provided schema. Each column type has a default formatter.
 It will be possible to provide user defined formatter to handle schemaless fields.
 
-Default formatters implementation:
+Then is possible to be called as:
+
+`formatter(data)`
+
+where data is an array of objects
+
+### Default formatters implementation:
 
 * String -> returned as it is
 * Number -> returned as string
 * Date -> returned as ISO 8601 Date
 * Object -> it will flatten the object properties into columns
 
-example
+#### example
 
     prop : {
         a : 'b',
@@ -30,8 +39,41 @@ It will then generate data, providing an array of arrays ready for csv serializa
 
 ##Usage example
 
+```
+var csvResponse = require('../middlewares/csv/index.js');
+var modelCsvResponse = csvResponse(Model, 'mongoose', ['fieldToExclude']);
+Model.find(
+    function(err, result){
 
+        if(err){ return next(err);}
 
+        res.format({
+
+            json : function(){
+
+                res.json(result);
+            },
+
+            'text/csv' : function(){
+                res.csv(modelCsvResponse(result));
+            },
+        });
+    });
+```
+
+### Extend the model with custom field
+
+Is possible to provide custom field to the formatter in this way:
+```
+var csvResponse = require('../middlewares/csv/index.js');
+var extend = {
+    customPropery : {
+        Subproperty: Type (Number, String, ...)
+    }
+};
+
+var modelCsvResponse = csvResponse(Model, 'mongoose', [], extend);
+```
 
 ### More documentation and examples in spec/
 
